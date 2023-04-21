@@ -1,0 +1,44 @@
+<html>
+<head>
+<link rel="stylesheet" href="tui-grid.css" />
+<script src="tui-grid.js"></script>
+</head>
+
+
+<body> <div id="grid"></div> </body>
+<script>
+const Grid = tui.Grid;
+
+const options = {
+  usageStatistics: false,
+  el: document.getElementById('grid'),
+  treeColumnOptions: {
+    name: 'name',
+    useIcon: true,
+    useCascadingCheckbox: true
+  },
+  columns: [
+    {
+      header: 'Name',
+      name: 'name'
+    },
+    {
+      header: 'Param1',
+      name: 'param1'
+    },
+    {
+      header: 'Param2',
+      name: 'param2'
+    },
+  ],
+  data: [],
+};
+
+const instance = new Grid(options);
+
+fetch("/api/data")
+  .then((resp) => resp.json())
+  .then((data) => instance.resetData(data))
+</script>
+
+</html>
